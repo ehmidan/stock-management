@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2021 at 11:00 AM
+-- Generation Time: May 26, 2021 at 04:30 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `insert`
+-- Database: `gestiondestock`
 --
 
 -- --------------------------------------------------------
@@ -67,10 +67,17 @@ CREATE TABLE `form` (
   `lname` varchar(20) NOT NULL,
   `phone` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(10) NOT NULL,
-  `confirm` varchar(10) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `confirm` varchar(255) NOT NULL,
   `GroupId` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `form`
+--
+
+INSERT INTO `form` (`id`, `fname`, `lname`, `phone`, `email`, `password`, `confirm`, `GroupId`) VALUES
+(82, 'yassin', 'boliuon', '0646646464', 'ehmidan.soulayman.solicode@gmail.com', '$2y$10$1GRWuiHztUVTKVk.usd2H.Rw25XqsR.QbS4M9GXObBjfq9n.MyR2e', '$2y$10$mCCsITOcdJBvS5YNZivo5eHwe52kWALmPH1J6a1pHxhEc1fuZ8xMC', 0);
 
 --
 -- Indexes for dumped tables
@@ -104,7 +111,7 @@ ALTER TABLE `catigorys`
 -- AUTO_INCREMENT for table `form`
 --
 ALTER TABLE `form`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

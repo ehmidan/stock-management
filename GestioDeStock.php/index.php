@@ -1,14 +1,3 @@
-<?php
-include "connect.php";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $EMAIL = $_POST["user"];
-    $PASSWORD = $_POST["pass"];
-
-    //  $HACHEDPASSWORD =sha1($PASSWORD);
-}
-
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,15 +28,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" name="submit" class="btn btn-primary mt-5 btn-block ">SUBMIT</button>
             <a href="regester.php" class="btn btn-outline-success mb-3 btn-block">REGESTERE</a>
             <?php
+            include "connect.php";
             //Check If User Exist In Database 
+
 if (isset($_POST['submit'])) {
-    $stmt = $pdo->prepare("SELECT  email, password FROM form WHERE email = ? AND password  = ? AND GroupId = 1 ");
-    $stmt->execute(array($EMAIL, $PASSWORD));
+    $EMAIL = $_POST["user"];
+    $PASSWORD = $_POST["pass"];
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? AND GroupId = 1");
+    $stmt->execute(array($EMAIL));
     $count = $stmt->rowCount();
     if ($count > 0) {
-        header("location:category.php");
-    }
-     else {echo '<script> alert ("you are a not Admine")</script>';} 
+         $Category = $stmt->fetch();
+            if(password_verify($PASSWORD,$Category["password"])){
+                header("location:category.php");
+            }else {
+            echo '<script> alert ("EROUR")</script>';
+            }  
+        
+    }else {
+        echo '<script> alert ("you are a not Admine")</script>';
+        } 
+      
     }
     ?>
         </form>

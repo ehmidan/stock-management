@@ -1,28 +1,4 @@
-<?php
-include "connect.php";
 
-if (isset($_POST['submit'])) {
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirm = $_POST['confirm'];
-
-    $sql = "INSERT INTO  form (fname,lname,email,phone,password,confirm) VALUES (:fname ,:lname ,:email , :phone , :password, :confirm)";
-
-    $pdor = $pdo->prepare($sql);
-
-    $pdoe = $pdor->execute(array(":fname" => $fname, ":lname" => $lname, ":phone" => $phone, ":email" => $email, ":password" => $password, ":confirm" => $confirm));
-    if ($pdoe) {
-        header("location:index.php");
-    } else {
-        echo "Data not insert";
-    }
-}
-
-
-?>
 
 
 
@@ -83,6 +59,34 @@ if (isset($_POST['submit'])) {
     <script src="./js/popper.min.js"></script>
     <script src="./js/jquery-3.5.1.min.js"></script>
     <script src="./js/bootstrap.js"></script>
+
+    <?php
+include "connect.php";
+
+if (isset($_POST['submit'])) {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $hashedPass = password_hash($password, PASSWORD_DEFAULT);
+    $confirm = $_POST['confirm'];
+    $hashedConfirm = password_hash($confirm, PASSWORD_DEFAULT);
+
+    $sql = "INSERT INTO  users (fname,lname,email,phone,password,confirm) VALUES (:fname ,:lname ,:email , :phone , :password, :confirm)";
+
+    $pdor = $pdo->prepare($sql);
+
+    $pdoe = $pdor->execute(array(":fname" => $fname, ":lname" => $lname, ":phone" => $phone, ":email" => $email, ":password" => $hashedPass, ":confirm" => $hashedConfirm));
+    if ($pdoe) {
+        header("location:index.php");
+    } else {
+        echo "Data not insert";
+    }
+}
+
+
+?>
 </body>
 
 </html>

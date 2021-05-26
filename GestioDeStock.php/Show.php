@@ -1,10 +1,3 @@
-<?php
-//DELETE prudect from Database 
-
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 

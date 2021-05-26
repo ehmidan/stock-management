@@ -1,5 +1,5 @@
 <?php
-$dsn = 'mysql:host=localhost;dbname=insert'; //Data source name
+$dsn = 'mysql:host=localhost;dbname=gestiondestock'; //Data source name
 $user = 'root'; //the user the conect
 $pass = ''; // password off this user
 
